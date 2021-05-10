@@ -69,5 +69,5 @@ Il sistema invia una riga di log ad ogni evento di seguito:
 - modifica del nome del Progetto ("CAMBIO NOME")
 - termine dell'applicazione ("TERMINE")
 
-La riga di log contiene: nome del progetto, indirizzo IP del client, data-ora corrente, etichetta dell'evento, SE l'etichetta è  `Aggiungi`, `Elimina`, `>`, `<` invia anche il titolo del compito in questione
+La riga di log contiene: nome del progetto, indirizzo IP del client, data-ora corrente, etichetta dell'evento
 
