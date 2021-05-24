@@ -40,6 +40,7 @@ All'avvio il Sistema legge dal file di configurazione in XML i seguenti dati:
 - username e password del DBMS
 - IP e porta del DBMS
 - nome dei tre stati disponibili (di default `Da fare`, `In esecuzione`, `Eseguiti`)
+- id del progetto da caricare dal database
 - se mostrare la legenda nel grafico a torta
 - colore di sfondo
 - massimo numero di compiti inseribili per ogni stato
