@@ -1,0 +1,43 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!-- skillshare_config.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:element name="ParametriConfigurazione">
+  <xs:complexType>
+  <xs:sequence>
+   	<xs:element name="maxRigheTab1" type="xs:decimal">
+   		</xs:element>
+   	<xs:element name="maxRigheTab2" type="xs:decimal">
+   		</xs:element>
+   	<xs:element name="maxRigheTab3" type="xs:decimal">
+   		</xs:element>
+  	<xs:element name="nomeStato1" type="xs:string">
+   		</xs:element>
+  	<xs:element name="nomeStato2" type="xs:string">
+   		</xs:element>
+  	<xs:element name="nomeStato3" type="xs:string">
+   		</xs:element>
+   	<xs:element name="coloreBackground" type="xs:string">
+  		</xs:element>
+	<xs:element name="ProjectID" type="xs:decimal">
+    	</xs:element>
+	<xs:element name="IPDBMS" type="xs:string">
+    	</xs:element>
+	<xs:element name="portaDBMS" type="xs:decimal">
+    	</xs:element>
+	<xs:element name="usernameDBMS" type="xs:string">
+    	</xs:element>
+	<xs:element name="passwordDBMS" type="xs:string">
+    	</xs:element>
+	<xs:element name="IPClient" type="xs:string">
+    	</xs:element>
+	<xs:element name="IPServer" type="xs:string">
+    	</xs:element>
+	<xs:element name="portaServer" type="xs:decimal">
+    	</xs:element>
+ </xs:sequence> 
+ <xs:attribute name="mostraLegendaGrafico"  type="xs:boolean"   use="required" />
+ </xs:complexType>
+</xs:element>
+
+</xs:schema>

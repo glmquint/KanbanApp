@@ -10,3 +10,8 @@ fine 18:35
 10:12->11:00 [analisi UML]
 15:45->17:15 [refactor e lavoro su dbms connection]
 19:30->20:00 [remove compito functionality]
+---
+09:00->12:59[5m id, 35m cache, 10m maxTabSize]
+12:59->13:00[lavorato sullo schema UML delle classi con definizione degli attributi e dei metodi necessari. In particolare sono state definite le componenti fondamentali dell'interfaccia, della cache, dei parametri di config, del ponte applicazione-database e dei compiti che compongono il progetto. Di questi è stata definita anche la rappresentazione con Schema E-R che avranno all'interno del database. Infine sono state definite, per ogni classe, le librerie in uso e le relazioni di dipendenza tra di esse.]
+---
+09:00->11:00[1h config, 30m refactor xml parser, 30m logger and log server bugging]

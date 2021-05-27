@@ -21,4 +21,8 @@ CREATE TABLE `compito` (
 ) ;
 
 INSERT INTO `progetto` VALUES (1, "Titolo ") ;
-INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES ("Lorem", "ipsum dolor sit amet", 1, 1), ("Ipsum", "ipsum dolor sit amet", 2, 1), ("Dolor", "ipsum dolor sit amet", 3, 1), ("Sit", "ipsum dolor sit amet", 1, 1);
+INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) 
+	VALUES ("Lorem", "ipsum dolor sit amet", 1, 1), 
+		("Ipsum", "ipsum dolor sit amet", 2, 1), 
+		("Dolor", "ipsum dolor sit amet", 3, 1), 
+		("Sit", "ipsum dolor sit amet", 1, 1);

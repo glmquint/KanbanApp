@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- skillshare_config.xml -->
+<ParametriConfigurazione mostraLegendaGrafico = "true">
+	<maxRigheTab1>3</maxRigheTab1>
+	<maxRigheTab2>3</maxRigheTab2>
+	<maxRigheTab3>4</maxRigheTab3>
+	<nomeStato1>mio Da fare</nomeStato1>
+	<nomeStato2>mio In esecuzione</nomeStato2>
+	<nomeStato3>mio Completati</nomeStato3>
+	<coloreBackground>white</coloreBackground>
+	<ProjectID>1</ProjectID>
+	<IPDBMS>localhost</IPDBMS>
+	<portaDBMS>3306</portaDBMS>
+	<usernameDBMS>root</usernameDBMS>
+	<passwordDBMS></passwordDBMS>
+	<IPClient>localhost</IPClient>
+	<IPServer>localhost</IPServer>
+	<portaServer>4242</portaServer>
+</ParametriConfigurazione>
