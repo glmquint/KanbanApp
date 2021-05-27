@@ -15,3 +15,6 @@ fine 18:35
 12:59->13:00[lavorato sullo schema UML delle classi con definizione degli attributi e dei metodi necessari. In particolare sono state definite le componenti fondamentali dell'interfaccia, della cache, dei parametri di config, del ponte applicazione-database e dei compiti che compongono il progetto. Di questi è stata definita anche la rappresentazione con Schema E-R che avranno all'interno del database. Infine sono state definite, per ogni classe, le librerie in uso e le relazioni di dipendenza tra di esse.]
 ---
 09:00->11:00[1h config, 30m refactor xml parser, 30m logger and log server bugging]
+---
+ ->[prototipazione degli elementi fondamentali dell'interfaccia. Tramite la documentazione online, sono state provate varie implementazioni possibili per tabelle, grafici e comunicazione di messaggi con un server tramite socket. Con queste informazioni è stata realizzata una prima soluzione possibile di interfaccia secondo lo schema del mockup con alcuni pulsanti, campi di testo, un grafico a torta e le tre tabelle che conterranno i compiti, il tutto con il minor numero di modifiche necessarie]
+
