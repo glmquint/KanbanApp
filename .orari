@@ -17,4 +17,5 @@ fine 18:35
 09:00->11:00[1h config, 30m refactor xml parser, 30m logger and log server bugging]
 ---
  ->[prototipazione degli elementi fondamentali dell'interfaccia. Tramite la documentazione online, sono state provate varie implementazioni possibili per tabelle, grafici e comunicazione di messaggi con un server tramite socket. Con queste informazioni è stata realizzata una prima soluzione possibile di interfaccia secondo lo schema del mockup con alcuni pulsanti, campi di testo, un grafico a torta e le tre tabelle che conterranno i compiti, il tutto con il minor numero di modifiche necessarie]
-
+---
+ ->[introdotto il progetto vero e proprio contenente la classe principale dell'interfaccia. Seppur ancora con uno stile grezzo, sono presenti le tre tabelle dei compiti ed un semplice form con due campi di testo per poter aggiungere un nuovo compito alla lista dei da-fare. Sono presenti le frecce per spostare un compito da una tabella ad un'altra, il grafico a torta che viene aggiornato ad ogni cambiamento del contenuto di una delle tre tabelle, oltre ai label hard-coded con il nome dei tre stati.]
