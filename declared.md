@@ -25,3 +25,7 @@ prototipazione degli elementi fondamentali dell'interfaccia. Tramite la document
 29/5 14:30->18:32 4h
 
 introdotto il progetto vero e proprio contenente la classe principale dell'interfaccia. Seppur ancora con uno stile grezzo, sono presenti le tre tabelle dei compiti ed un semplice form con due campi di testo per poter aggiungere un nuovo compito alla lista dei da-fare. Sono presenti le frecce per spostare un compito da una tabella ad un'altra, il grafico a torta che viene aggiornato ad ogni cambiamento del contenuto di una delle tre tabelle, oltre ai label hard-coded con il nome dei tre stati.
+
+3/6 15:00->20:00 5h
+
+sviluppata la funzionalità di configurazione dell'applicazione tramite file xml. In particolare, è stata introdotta la classe ParametriConfig che si appoggia su GestoreXML per validare (tramite il file xsd) ed estrarre i valori contenuti nel file xml come specificato nel documento di analisi. Questi valori, inizializzati all' avvio dell'applicazione, sono così disponibili alla classe dell'interfaccia. Attualmente gli unici valori inutilizzati riguardano la connettività con archivio e log server
