@@ -1,33 +1,29 @@
 
-import javafx.beans.property.SimpleStringProperty;
-
 public class Compito {
  
-    private final SimpleStringProperty titolo;
-    private final SimpleStringProperty descrizione;
+    private String titolo;
+    private String descrizione;
 
 
 
-    public Compito(String _titolo, String _descrizione) {
-        this.titolo = new SimpleStringProperty(_titolo);
-        this.descrizione = new SimpleStringProperty(_descrizione);
+    public Compito(String titolo, String descrizione) {
+        this.titolo = titolo;
+        this.descrizione = descrizione;
     }
 
     public String getTitolo() {
-        return titolo.get();
+        return titolo;
     }
 
-    public void setTitolo(String _titolo) {
-        
-        if (_titolo != "" && _titolo != null && !_titolo.isEmpty()) //FIXUP ?????
-            titolo.set(_titolo);
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
     public String getDescrizione() {
-        return descrizione.get();
+        return descrizione;
     }
 
-    public void setDescrizione(String _descrizione) {
-        descrizione.set(_descrizione);
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 }
