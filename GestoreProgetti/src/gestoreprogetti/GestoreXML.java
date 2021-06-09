@@ -36,14 +36,14 @@ public class GestoreXML {
     public ParametriConfigurazione estrai(){
         ParametriConfigurazione contenutoFileXML;
         try{
-        String x = new String(Files.readAllBytes(Paths.get("gestoreProgetti_config.xml")));
-        XStream xs = new XStream();
-        xs.useAttributeFor(ParametriConfigurazione.class, "mostraLegendaGrafico");
-        contenutoFileXML = (ParametriConfigurazione)xs.fromXML(x); 
+            String x = new String(Files.readAllBytes(Paths.get("gestoreProgetti_config.xml")));
+            XStream xs = new XStream();
+            xs.useAttributeFor(ParametriConfigurazione.class, "mostra_legenda_grafico");
+            contenutoFileXML = (ParametriConfigurazione)xs.fromXML(x); 
 
         } catch (IOException e) {
-                System.out.println(e.getMessage());
-                return null;
+            System.out.println("Problema nell'estrazione del file di configurazione: " + e.getMessage());
+            return null;
         }
         return contenutoFileXML;
     }

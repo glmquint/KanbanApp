@@ -9,12 +9,12 @@ public class PonteApplicazioneDB {
     }
     
     public List<Compito> QueryCompito(int stato){
-        String statement = "SELECT titolo, descrizione FROM compito WHERE progetto_id = " + interfaccia.parametri_configurazione.ProjectID + " AND stato = '" + stato + "';";
+        String statement = "SELECT titolo, descrizione FROM compito WHERE progetto_id = " + interfaccia.parametri_configurazione.id_progetto + " AND stato = '" + stato + "';";
         System.out.println("è stata chiamata la perform Query con statement: " + statement);
         List<Compito> listaCompiti = new ArrayList<>();        
-        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.IPDBMS + ":" + interfaccia.parametri_configurazione.portaDBMS + "/gestoreprogettidb";
+        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.ip_dbms + ":" + interfaccia.parametri_configurazione.porta_dbms + "/gestoreprogettidb";
         try
-        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.usernameDBMS, interfaccia.parametri_configurazione.passwordDBMS);
+        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.username_dbms, interfaccia.parametri_configurazione.password_dbms);
          Statement st = co.createStatement();
         )
         {
@@ -33,12 +33,12 @@ public class PonteApplicazioneDB {
     }
     
     public String QueryProgetto(){
-        String statement = "SELECT nome FROM progetto WHERE id = " + interfaccia.parametri_configurazione.ProjectID;
+        String statement = "SELECT nome FROM progetto WHERE id = " + interfaccia.parametri_configurazione.id_progetto;
         System.out.println("è stata chiamata la perform Query con statement: " + statement);
         String nome_progetto = "";
-        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.IPDBMS + ":" + interfaccia.parametri_configurazione.portaDBMS + "/gestoreprogettidb";
+        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.ip_dbms + ":" + interfaccia.parametri_configurazione.porta_dbms + "/gestoreprogettidb";
         try
-        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.usernameDBMS, interfaccia.parametri_configurazione.passwordDBMS);
+        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.username_dbms, interfaccia.parametri_configurazione.password_dbms);
          Statement st = co.createStatement();
         )
         {
@@ -54,9 +54,9 @@ public class PonteApplicazioneDB {
     
     private Boolean eseguiAggiornamento(String statement){
         Boolean operazioneEseguita = false;
-        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.IPDBMS + ":" + interfaccia.parametri_configurazione.portaDBMS + "/gestoreprogettidb";
+        String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.ip_dbms + ":" + interfaccia.parametri_configurazione.porta_dbms + "/gestoreprogettidb";
         try
-        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.usernameDBMS, interfaccia.parametri_configurazione.passwordDBMS);
+        (Connection co = DriverManager.getConnection(connessione, interfaccia.parametri_configurazione.username_dbms, interfaccia.parametri_configurazione.password_dbms);
          Statement st = co.createStatement();
         )
         {
@@ -68,21 +68,21 @@ public class PonteApplicazioneDB {
     
     public Boolean aggiornaCompiti(){
         Boolean retval = true;
-        this.eseguiAggiornamento("DELETE FROM compito WHERE progetto_id = " + interfaccia.parametri_configurazione.ProjectID);
+        this.eseguiAggiornamento("DELETE FROM compito WHERE progetto_id = " + interfaccia.parametri_configurazione.id_progetto);
         for (int i = 0; i < interfaccia.compiti_da_fare.size(); i++) {
-            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_da_fare.get(i).getTitolo() + "\", \"" + interfaccia.compiti_da_fare.get(i).getDescrizione() + "\", 1, " + interfaccia.parametri_configurazione.ProjectID + ")");
+            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_da_fare.get(i).getTitolo() + "\", \"" + interfaccia.compiti_da_fare.get(i).getDescrizione() + "\", 1, " + interfaccia.parametri_configurazione.id_progetto + ")");
         }
         for (int i = 0; i < interfaccia.compiti_in_esecuzione.size(); i++) {
-            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_in_esecuzione.get(i).getTitolo() + "\", \"" + interfaccia.compiti_in_esecuzione.get(i).getDescrizione() + "\", 2, " + interfaccia.parametri_configurazione.ProjectID + ")");
+            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_in_esecuzione.get(i).getTitolo() + "\", \"" + interfaccia.compiti_in_esecuzione.get(i).getDescrizione() + "\", 2, " + interfaccia.parametri_configurazione.id_progetto + ")");
         }
         for (int i = 0; i < interfaccia.compiti_completati.size(); i++) {
-            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_completati.get(i).getTitolo() + "\", \"" + interfaccia.compiti_completati.get(i).getDescrizione() + "\", 3, " + interfaccia.parametri_configurazione.ProjectID + ")");
+            retval &= eseguiAggiornamento("INSERT INTO `compito` (`titolo`, `descrizione`, `stato`, `progetto_id`) VALUES (\"" + interfaccia.compiti_completati.get(i).getTitolo() + "\", \"" + interfaccia.compiti_completati.get(i).getDescrizione() + "\", 3, " + interfaccia.parametri_configurazione.id_progetto + ")");
         }
         return retval;
     }
     
     public Boolean aggiornaProgetto(){
-        return eseguiAggiornamento("UPDATE progetto SET nome = \"" + interfaccia.nome_progetto.getText() + "\" WHERE id = " + interfaccia.parametri_configurazione.ProjectID);
+        return eseguiAggiornamento("UPDATE progetto SET nome = \"" + interfaccia.nome_progetto.getText() + "\" WHERE id = " + interfaccia.parametri_configurazione.id_progetto);
     }
 }
 

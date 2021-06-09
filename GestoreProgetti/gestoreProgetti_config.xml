@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- skillshare_config.xml -->
-<ParametriConfigurazione mostraLegendaGrafico = "true">
-	<maxRigheTab1>3</maxRigheTab1>
-	<maxRigheTab2>3</maxRigheTab2>
-	<maxRigheTab3>4</maxRigheTab3>
-	<nomeStato1>mio Da fare</nomeStato1>
-	<nomeStato2>mio In esecuzione</nomeStato2>
-	<nomeStato3>mio Completati</nomeStato3>
-	<coloreBackground>white</coloreBackground>
-	<ProjectID>1</ProjectID>
-	<IPDBMS>localhost</IPDBMS>
-	<portaDBMS>3306</portaDBMS>
-	<usernameDBMS>root</usernameDBMS>
-	<passwordDBMS></passwordDBMS>
-	<IPClient>localhost</IPClient>
-	<IPServer>localhost</IPServer>
-	<portaServer>4242</portaServer>
+<ParametriConfigurazione mostra_legenda_grafico = "true">
+	<limite_prima_tabella>3</limite_prima_tabella>
+	<limite_seconda_tabella>3</limite_seconda_tabella>
+	<limite_terza_tabella>4</limite_terza_tabella>
+	<nome_prima_tabella>mio Da fare</nome_prima_tabella>
+	<nome_seconda_tabella>mio In esecuzione</nome_seconda_tabella>
+	<nome_terza_tabella>mio Completati</nome_terza_tabella>
+	<colore_background>white</colore_background>
+	<id_progetto>1</id_progetto>
+	<ip_dbms>localhost</ip_dbms>
+	<porta_dbms>3306</porta_dbms>
+	<username_dbms>root</username_dbms>
+	<password_dbms></password_dbms>
+	<ip_client>localhost</ip_client>
+	<ip_log_server>localhost</ip_log_server>
+	<porta_log_server>4242</porta_log_server>
 </ParametriConfigurazione>

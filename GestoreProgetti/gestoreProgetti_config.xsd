@@ -5,38 +5,38 @@
 <xs:element name="ParametriConfigurazione">
   <xs:complexType>
   <xs:sequence>
-   	<xs:element name="maxRigheTab1" type="xs:decimal">
+   	<xs:element name="limite_prima_tabella" type="xs:decimal">
    		</xs:element>
-   	<xs:element name="maxRigheTab2" type="xs:decimal">
+   	<xs:element name="limite_seconda_tabella" type="xs:decimal">
    		</xs:element>
-   	<xs:element name="maxRigheTab3" type="xs:decimal">
+   	<xs:element name="limite_terza_tabella" type="xs:decimal">
    		</xs:element>
-  	<xs:element name="nomeStato1" type="xs:string">
+  	<xs:element name="nome_prima_tabella" type="xs:string">
    		</xs:element>
-  	<xs:element name="nomeStato2" type="xs:string">
+  	<xs:element name="nome_seconda_tabella" type="xs:string">
    		</xs:element>
-  	<xs:element name="nomeStato3" type="xs:string">
+  	<xs:element name="nome_terza_tabella" type="xs:string">
    		</xs:element>
-   	<xs:element name="coloreBackground" type="xs:string">
+   	<xs:element name="colore_background" type="xs:string">
   		</xs:element>
-	<xs:element name="ProjectID" type="xs:decimal">
+	<xs:element name="id_progetto" type="xs:decimal">
     	</xs:element>
-	<xs:element name="IPDBMS" type="xs:string">
+	<xs:element name="ip_dbms" type="xs:string">
     	</xs:element>
-	<xs:element name="portaDBMS" type="xs:decimal">
+	<xs:element name="porta_dbms" type="xs:decimal">
     	</xs:element>
-	<xs:element name="usernameDBMS" type="xs:string">
+	<xs:element name="username_dbms" type="xs:string">
     	</xs:element>
-	<xs:element name="passwordDBMS" type="xs:string">
+	<xs:element name="password_dbms" type="xs:string">
     	</xs:element>
-	<xs:element name="IPClient" type="xs:string">
+	<xs:element name="ip_client" type="xs:string">
     	</xs:element>
-	<xs:element name="IPServer" type="xs:string">
+	<xs:element name="ip_log_server" type="xs:string">
     	</xs:element>
-	<xs:element name="portaServer" type="xs:decimal">
+	<xs:element name="porta_log_server" type="xs:decimal">
     	</xs:element>
  </xs:sequence> 
- <xs:attribute name="mostraLegendaGrafico"  type="xs:boolean"   use="required" />
+ <xs:attribute name="mostra_legenda_grafico"  type="xs:boolean"   use="required" />
  </xs:complexType>
 </xs:element>
 
