@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
 
 public class OperatoreXML {
     
-    public void valida(){
+    public void valida(){/*(1)*/
         try {   
             DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -33,7 +33,7 @@ public class OperatoreXML {
           }
     }
     
-    public ParametriConfigurazione estrai(){
+    public ParametriConfigurazione estrai(){/*(2)*/
         ParametriConfigurazione contenutoFileXML;
         try{
             String x = new String(Files.readAllBytes(Paths.get("gestoreProgetti_config.xml")));
@@ -48,10 +48,20 @@ public class OperatoreXML {
         return contenutoFileXML;
     }
     
-    public String formattaMessaggio(MessaggioLog messaggioDaInviare) {
+    public String formattaMessaggio(MessaggioLog messaggioDaInviare) {/*(3)*/
         XStream xs = new XStream();
         xs.registerConverter(new DateConverter("yyyy:MM:dd_HH:mm:ss", null)); //03
         return xs.toXML(messaggioDaInviare);
     }
     
 }
+
+/* Commenti:
+    (1): valida il contenuto letto dal file di configurazione tramite la struttura
+        definita nel file xsd
+    (2): estre il contenuto letto nel file di configurazione facendone il cast
+        esplicito ad un oggetto temporaneto di tipo ParametriConfigurazione 
+        che verrà ritornato per traasferire i valori effettivi letti
+    (3): formatta il messaggio di log passatogli in formato xml per poter essere
+        poi inviato dalla classe Logger
+*/

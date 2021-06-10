@@ -24,7 +24,7 @@ public class ParametriConfigurazione implements Serializable{
     
     public ParametriConfigurazione(){
         operatore_xml.valida();
-        ParametriConfigurazione tmp = operatore_xml.estrai(); //02
+        ParametriConfigurazione tmp = operatore_xml.estrai(); /*(1)*/
         
         this.limite_prima_tabella = tmp.limite_prima_tabella;
         this.limite_seconda_tabella = tmp.limite_seconda_tabella;
@@ -48,11 +48,9 @@ public class ParametriConfigurazione implements Serializable{
 }
 
 /*
-Note:
-(01) I file skillshare_this.xml e skillshare_this.xsd si trovano nella
-     directory radice
-(02) Si estrae il contenuto dal file di thisurazione
-(03) Una volta ottenuto il valore di ciascun parametro thisurabile, si
-     assegna ciascun valore al campo corrispondente nell'istanza della classe
-     ParametriConfigurazione che sarà utilizzata dalle altre classi dell'app
+Commenti:
+    (1): l'estrai della classe operatore_xml ritornerà un oggetto di tipo 
+        ParametriConfigurazione direttamente dal file xml tarmite casting
+        esplicito: così è possibile accederci ai campi e usarli per impostare
+        i valori di quest'oggetto usato dalla classe GestoreProgettiGUI
 */

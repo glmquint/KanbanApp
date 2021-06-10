@@ -76,28 +76,26 @@ public class GestoreProgettiGUI extends Application {
     final VBox vbox3 = new VBox();
     final VBox MasterVbox = new VBox();
     
-    public void impostaTabella3() {
+    public void impostaTabella3() {/* (1) */
         nome_tabella_completati = new Label(parametri_configurazione.nome_terza_tabella);
         nome_tabella_completati.setFont(new Font("Arial", 30));
-        id_progetto = new Label("ID progetto: " + parametri_configurazione.id_progetto);  
-        id_progetto.setFont(new Font("Arial", 25));
-        compiti_completati = FXCollections.observableArrayList(ponte_database.QueryCompito(3));
+        compiti_completati = FXCollections.observableArrayList(ponte_database.QueryCompito(3)); /* (2) */
         TableColumn titoloCol3 = new TableColumn("Titolo");
         titoloCol3.setMinWidth(100*2);
         titoloCol3.setCellValueFactory(
-            new PropertyValueFactory<Compito, String>("titolo"));
+            new PropertyValueFactory<Compito, String>("titolo")); /*(3)*/
         TableColumn descrizioneCol3 = new TableColumn("Descrizione");
         descrizioneCol3.setMinWidth(200*2);
         descrizioneCol3.setCellValueFactory(
-            new PropertyValueFactory<Compito, String>("descrizione"));
+            new PropertyValueFactory<Compito, String>("descrizione"));/*(3)*/
         
         tabella_completati.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+            if (newSelection != null) {/*(4) */
                 compito_selezionato = newSelection;
                 lista_selezionata = compiti_completati;
                 tabella_in_esecuzione.getSelectionModel().clearSelection();
                 tabella_da_fare.getSelectionModel().clearSelection();
-                if (tasto_elimina.isDisabled()) {
+                if (tasto_elimina.isDisabled()) { /*(5) */
                     tasto_elimina.setDisable(false);
                 }
             }
@@ -106,26 +104,26 @@ public class GestoreProgettiGUI extends Application {
         tabella_completati.getColumns().addAll(titoloCol3, descrizioneCol3);
     }
     
-    public void impostaTabella2() {
+    public void impostaTabella2() {/* (6) */
         nome_tabella_in_esecuzione = new Label(parametri_configurazione.nome_seconda_tabella);
         nome_tabella_in_esecuzione.setFont(new Font("Arial", 30));
-        compiti_in_esecuzione = FXCollections.observableArrayList(ponte_database.QueryCompito(2));
+        compiti_in_esecuzione = FXCollections.observableArrayList(ponte_database.QueryCompito(2)); /*(2)*/
         TableColumn titoloCol2 = new TableColumn("Titolo");
         titoloCol2.setMinWidth(100*2);
         titoloCol2.setCellValueFactory(
-            new PropertyValueFactory<Compito, String>("titolo"));
+            new PropertyValueFactory<Compito, String>("titolo"));/*(3)*/
         TableColumn descrizioneCol2 = new TableColumn("Descrizione");
         descrizioneCol2.setMinWidth(200*2);
         descrizioneCol2.setCellValueFactory(
-            new PropertyValueFactory<Compito, String>("descrizione"));
+            new PropertyValueFactory<Compito, String>("descrizione"));/*(3)*/
 
         tabella_in_esecuzione.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+            if (newSelection != null) {/*(4)*/
                 compito_selezionato = newSelection;
                 lista_selezionata = compiti_in_esecuzione;
                 tabella_da_fare.getSelectionModel().clearSelection();
                 tabella_completati.getSelectionModel().clearSelection();
-                if (tasto_elimina.isDisabled()) {
+                if (tasto_elimina.isDisabled()) {/*(5)*/
                     tasto_elimina.setDisable(false);
                 }
             }
@@ -134,9 +132,9 @@ public class GestoreProgettiGUI extends Application {
         tabella_in_esecuzione.getColumns().addAll(titoloCol2, descrizioneCol2);
     }
     
-    public void impostaTabella1() {
+    public void impostaTabella1() {/* (7) */
         
-        Callback<TableColumn, TableCell> cellFactory =
+        Callback<TableColumn, TableCell> cellFactory = /* (8) */
              new Callback<TableColumn, TableCell>() {
                  public TableCell call(TableColumn p) {
                     return new CellaEditabile();
@@ -144,14 +142,14 @@ public class GestoreProgettiGUI extends Application {
              };
         nome_tabella_da_fare = new Label(parametri_configurazione.nome_prima_tabella);
         nome_tabella_da_fare.setFont(new Font("Arial", 30));
-        tabella_da_fare.setEditable(true);
-        compiti_da_fare = FXCollections.observableArrayList(ponte_database.QueryCompito(1));
+        tabella_da_fare.setEditable(true); /* (9) */
+        compiti_da_fare = FXCollections.observableArrayList(ponte_database.QueryCompito(1));/*(2)*/
         TableColumn titoloCol1 = new TableColumn("Titolo");
         titoloCol1.setMinWidth(100 * 2);
         titoloCol1.setCellValueFactory(
-            new PropertyValueFactory<>("titolo"));
+            new PropertyValueFactory<>("titolo"));/*(3)*/
         titoloCol1.setCellFactory(cellFactory);
-        titoloCol1.setOnEditCommit(
+        titoloCol1.setOnEditCommit( /* (10) */
             new EventHandler<CellEditEvent<Compito, String>>() {
                 @Override
                 public void handle(CellEditEvent<Compito, String> t) {
@@ -166,9 +164,9 @@ public class GestoreProgettiGUI extends Application {
         TableColumn descrizioneCol1 = new TableColumn("Descrizione");
         descrizioneCol1.setMinWidth(200 * 2);
         descrizioneCol1.setCellValueFactory(
-            new PropertyValueFactory<Compito, String>("descrizione"));
+            new PropertyValueFactory<Compito, String>("descrizione"));/*(3)*/
         descrizioneCol1.setCellFactory(cellFactory);
-        descrizioneCol1.setOnEditCommit(
+        descrizioneCol1.setOnEditCommit(/*(10)*/
             new EventHandler<CellEditEvent<Compito, String>>() {
                 @Override
                 public void handle(CellEditEvent<Compito, String> t) {
@@ -180,12 +178,12 @@ public class GestoreProgettiGUI extends Application {
             }
         );
         tabella_da_fare.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
+            if (newSelection != null) {/*(4)*/
                 compito_selezionato = newSelection;
                 lista_selezionata = compiti_da_fare;
                 tabella_in_esecuzione.getSelectionModel().clearSelection();
                 tabella_completati.getSelectionModel().clearSelection();
-                if (tasto_elimina.isDisabled()) {
+                if (tasto_elimina.isDisabled()) {/*(5)*/
                     tasto_elimina.setDisable(false);
                 }
             }
@@ -194,12 +192,12 @@ public class GestoreProgettiGUI extends Application {
         tabella_da_fare.getColumns().addAll(titoloCol1, descrizioneCol1);
     }
     
-    public void impostaFrecce(){
+    public void impostaFrecce(){/* (11) */
         sposta_da_fare_in_esecuzione.setOnAction((ActionEvent e) -> {
             System.out.println("sposta_da_fare_in_esecuzione");
             Compito selectedCompito = tabella_da_fare.getSelectionModel().getSelectedItem();
             if (selectedCompito != null) {
-                if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {
+                if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {/* (12) */
                     compiti_in_esecuzione.add(selectedCompito);
                     compiti_da_fare.removeAll(selectedCompito);
                     aggiornaGrafico();
@@ -212,7 +210,7 @@ public class GestoreProgettiGUI extends Application {
             System.out.println(tabella_in_esecuzione.getSelectionModel().getSelectedItem());
             Compito selectedCompito = tabella_in_esecuzione.getSelectionModel().getSelectedItem();
             if (selectedCompito != null) {
-                if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {
+                if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {/*(12)*/
                     compiti_da_fare.add(selectedCompito);
                     compiti_in_esecuzione.removeAll(selectedCompito);
                     aggiornaGrafico();
@@ -225,7 +223,7 @@ public class GestoreProgettiGUI extends Application {
             System.out.println(tabella_in_esecuzione.getSelectionModel().getSelectedItem());
             Compito selectedCompito = tabella_in_esecuzione.getSelectionModel().getSelectedItem();
             if (selectedCompito != null) {
-                if (compiti_completati.size() < parametri_configurazione.limite_terza_tabella) {
+                if (compiti_completati.size() < parametri_configurazione.limite_terza_tabella) {/*(12)*/
                     compiti_completati.add(selectedCompito);
                     compiti_in_esecuzione.removeAll(selectedCompito);
                     aggiornaGrafico();
@@ -238,7 +236,7 @@ public class GestoreProgettiGUI extends Application {
             System.out.println(tabella_completati.getSelectionModel().getSelectedItem());
             Compito selectedCompito = tabella_completati.getSelectionModel().getSelectedItem();
             if (selectedCompito != null) {
-                if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {
+                if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {/*(12)*/
                     compiti_in_esecuzione.add(selectedCompito);
                     compiti_completati.removeAll(selectedCompito);
                     aggiornaGrafico();
@@ -248,7 +246,7 @@ public class GestoreProgettiGUI extends Application {
         });
     }
     
-    public void impostaStyleBoxes(){
+    public void impostaStyleBoxes(){/* (13) */
         vbox1.setSpacing(5);
         vbox1.setPadding(new Insets(10, 10, 10, 10));
         vbox1.getChildren().addAll(nome_tabella_da_fare, tabella_da_fare, aggiungi_titolo, aggiungi_descrizione, tasto_aggiungi, tasto_elimina);
@@ -277,11 +275,11 @@ public class GestoreProgettiGUI extends Application {
         
         
         MasterVbox.setAlignment(Pos.CENTER);
-        MasterVbox.setStyle("-fx-background-color: " + parametri_configurazione.colore_background);
+        MasterVbox.setStyle("-fx-background-color: " + parametri_configurazione.colore_background);/*(14)*/
         
     }
 
-    public void impostaGrafico(){
+    public void impostaGrafico(){/*(15)*/
         dati_grafico =
         FXCollections.observableArrayList(
         new PieChart.Data(parametri_configurazione.nome_prima_tabella, 3),
@@ -291,15 +289,15 @@ public class GestoreProgettiGUI extends Application {
         grafico = new PieChart(dati_grafico);
         grafico.setTitle("Andamento");
 
-        grafico.setLegendVisible(parametri_configurazione.mostraLegendaGrafico);
+        grafico.setLegendVisible(parametri_configurazione.mostraLegendaGrafico);/* (16)*/
     }
     
-    public void impostaTasti(){
+    public void impostaTasti(){/*(17)*/
         tasto_elimina.setOnAction((ActionEvent e) -> {
             System.out.println("titolo is: " + compito_selezionato.getTitolo());
             lista_selezionata.remove(compito_selezionato);
             logger.invia("RIMUOVI");
-            aggiornaGrafico();
+            aggiornaGrafico();/* (18)*/
             if (lista_selezionata.isEmpty()) {
                 tasto_elimina.setDisable(true);
             }
@@ -307,7 +305,7 @@ public class GestoreProgettiGUI extends Application {
         tasto_elimina.setDisable(true);
         
         tasto_aggiungi.setOnAction((ActionEvent e) -> {
-            if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {
+            if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {/*(12)*/
                 compiti_da_fare.add(new Compito(
                         aggiungi_titolo.getText(),
                         aggiungi_descrizione.getText()));
@@ -319,7 +317,7 @@ public class GestoreProgettiGUI extends Application {
         });
     }
     
-    public void impostaTextInputs(){
+    public void impostaTextInputs(){/*(19)*/
         aggiungi_titolo = new TextField();
         aggiungi_titolo.setPromptText("Titolo");
         aggiungi_titolo.setMaxWidth(200*2);
@@ -327,10 +325,10 @@ public class GestoreProgettiGUI extends Application {
         aggiungi_descrizione.setMaxWidth(200*2);
         aggiungi_descrizione.setPromptText("Descrizione");
         
-        cache_gui = new CacheGUI(this);
+        cache_gui = new CacheGUI(this);/*(20)*/
     }
     
-    public void aggiornaGrafico() {
+    public void aggiornaGrafico() {/*(21)*/
         this.dati_grafico.set(0, new PieChart.Data(parametri_configurazione.nome_prima_tabella, this.tabella_da_fare.getItems().size()));
         this.dati_grafico.set(1, new PieChart.Data(parametri_configurazione.nome_seconda_tabella, this.tabella_in_esecuzione.getItems().size()));
         this.dati_grafico.set(2, new PieChart.Data(parametri_configurazione.nome_terza_tabella, this.tabella_completati.getItems().size()));
@@ -349,6 +347,8 @@ public class GestoreProgettiGUI extends Application {
         impostaTabella1();
         impostaTabella2();
         impostaTabella3();
+        id_progetto = new Label("ID progetto: " + parametri_configurazione.id_progetto);  
+        id_progetto.setFont(new Font("Arial", 25));
         impostaTextInputs();
         impostaTasti();
         impostaFrecce();
@@ -358,11 +358,11 @@ public class GestoreProgettiGUI extends Application {
         nome_progetto.setPromptText("Nome Progetto");
         nome_progetto.setMaxWidth(200*2);
         nome_progetto.setText(ponte_database.QueryProgetto());
-        nome_progetto.textProperty().addListener(new ChangeListener<String>() {
-        @Override 
-        public void changed(ObservableValue ov, String t, String t1) {                
-            logger.invia("CAMBIO NOME PROGETTO");
-        }    
+        nome_progetto.textProperty().addListener(new ChangeListener<String>() {/* (22) */
+            @Override 
+            public void changed(ObservableValue ov, String t, String t1) {                
+                logger.invia("CAMBIO NOME PROGETTO");
+            }    
         });
         MasterVbox.getChildren().addAll(id_progetto, nome_progetto, hbox);
         stage.setOnCloseRequest((WindowEvent we) -> {
@@ -380,12 +380,9 @@ public class GestoreProgettiGUI extends Application {
     }
     
 
-    class CellaEditabile extends TableCell<Compito, String> {
+    class CellaEditabile extends TableCell<Compito, String> {/*(23)*/
  
         private TextField textField;
- 
-        public CellaEditabile() {
-        }
  
         @Override
         public void startEdit() {
@@ -430,13 +427,9 @@ public class GestoreProgettiGUI extends Application {
         private void createTextField() {
             textField = new TextField(getString());
             textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
-            textField.focusedProperty().addListener(new ChangeListener<Boolean>(){
-                @Override
-                public void changed(ObservableValue<? extends Boolean> arg0, 
-                    Boolean arg1, Boolean arg2) {
-                        if (!arg2) {
-                            commitEdit(textField.getText());
-                        }
+            textField.focusedProperty().addListener((ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) -> {
+                if (!arg2) {
+                    commitEdit(textField.getText());
                 }
             });
         }
@@ -446,3 +439,53 @@ public class GestoreProgettiGUI extends Application {
         }
     }
 }
+
+/* Commenti:
+    (1): setup della terza tabella (compiti completati), simile alla seconda, 
+        non permette la modifica dei compiti che contiene
+    (2): il popolamento della tabella viene fatto tramite una richiesta al 
+        database relativamente a questo progetto e a questo stato
+    (3): viene usata una PropertyValueFactory per occuparsi del contenuto della 
+        cella sia per il titolo che per la descrizione dei compiti
+    (4): alla selezione di una nuova tabella si cambia il valore di 
+        compito_selezionato e tabella_selezionata, utili per l'eliminazione 
+        di un compito
+    (5): attivazione del tasto elimina se è stato selezionato un nuovo compito
+    (6): setup della seconda tabella (compiti in esecuzione), simile alla terza, 
+        non permette la modifica dei compiti che contiene
+    (7): setup della prima tabella (compiti da fare), l'unica che permette di 
+        editare i compiti che contiene
+    (8): la cellFactory verrà usata nelle colonne titolo e descrizione e sfrutta 
+        la classe CellaEditabile per gestire il comportamento di una riga della 
+        tabella quando questa viene selezionata
+    (9): è necessatio ricordarsi di settare la tabella come editabile o il 
+        comportamento sarà uguale a quello delle altre due tabelle
+    (10): si specifica la funzionalità di commit della cella editabile, in 
+        particolare viene settato il valore della cella con ciò che è contenuto 
+        nel textfield
+    (11): setup dei tasti a frecce che permettono di passare un compito da una 
+        tabella all'altra
+    (12): deve essere effettuato un check sul limite di compiti della tabella di 
+        destinazione, come definito nel file config
+    (13): setup delle vertical boxes e horizontal boxes usate per la 
+        disposizione degli elementi nell'interfaccia. Queste permettono di non 
+        usare setX e setY per ogni elemento dell'interfaccia e facilitano 
+        l'allineamento centrale di tutti gli elementi contenuti in una box
+    (14): il colore di sfondi viene definito dal file di configurazione
+    (15): inizializzazione del grafico a torta con le tre categorie possibili di 
+        stato per i compiti
+    (16): la visibilità della legenda è scelta nel file di configurazione
+    (17): setup dei tasti di aggiunta e rimozione di un compito da una tabella
+    (18): viene richiesto di ricalcolare il grafico a torta ad ogni pressione 
+        dei tasti
+    (19): setup dei textinputs per il titolo e la descrizione di un nuovo compito
+    (20): i textinput vengono inizializzati con il contenuto salvato nella cache
+    (21): l'aggiornamento del grafico consiste semplicemente nel contare il 
+        numero di compiti per ogni stato
+    (22): al cambio di valore del textfield per il nome del progetto deve essere 
+        inviato il relativo evento al log server
+    (23): classe interna necessaria per la funzionalità di editing della prima 
+        tabella. Definisce il comportamento che deve avere una cella della 
+        tabella per potersi trasformare in un textfield e trasfferire il proprio 
+        contenuto nella cella al momento del commit
+*/
