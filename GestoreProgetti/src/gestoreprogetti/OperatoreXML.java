@@ -15,7 +15,7 @@ import javax.xml.validation.SchemaFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-public class GestoreXML {
+public class OperatoreXML {
     
     public void valida(){
         try {   
@@ -38,7 +38,7 @@ public class GestoreXML {
         try{
             String x = new String(Files.readAllBytes(Paths.get("gestoreProgetti_config.xml")));
             XStream xs = new XStream();
-            xs.useAttributeFor(ParametriConfigurazione.class, "mostra_legenda_grafico");
+            xs.useAttributeFor(ParametriConfigurazione.class, "mostraLegendaGrafico");
             contenutoFileXML = (ParametriConfigurazione)xs.fromXML(x); 
 
         } catch (IOException e) {

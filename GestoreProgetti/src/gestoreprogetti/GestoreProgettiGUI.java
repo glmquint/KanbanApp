@@ -76,7 +76,7 @@ public class GestoreProgettiGUI extends Application {
     final VBox vbox3 = new VBox();
     final VBox MasterVbox = new VBox();
     
-    private void impostaTabella3() {
+    public void impostaTabella3() {
         nome_tabella_completati = new Label(parametri_configurazione.nome_terza_tabella);
         nome_tabella_completati.setFont(new Font("Arial", 30));
         id_progetto = new Label("ID progetto: " + parametri_configurazione.id_progetto);  
@@ -106,7 +106,7 @@ public class GestoreProgettiGUI extends Application {
         tabella_completati.getColumns().addAll(titoloCol3, descrizioneCol3);
     }
     
-    private void impostaTabella2() {
+    public void impostaTabella2() {
         nome_tabella_in_esecuzione = new Label(parametri_configurazione.nome_seconda_tabella);
         nome_tabella_in_esecuzione.setFont(new Font("Arial", 30));
         compiti_in_esecuzione = FXCollections.observableArrayList(ponte_database.QueryCompito(2));
@@ -134,7 +134,7 @@ public class GestoreProgettiGUI extends Application {
         tabella_in_esecuzione.getColumns().addAll(titoloCol2, descrizioneCol2);
     }
     
-    private void impostaTabella1() {
+    public void impostaTabella1() {
         
         Callback<TableColumn, TableCell> cellFactory =
              new Callback<TableColumn, TableCell>() {
@@ -158,6 +158,7 @@ public class GestoreProgettiGUI extends Application {
                     ((Compito) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).setTitolo(t.getNewValue());
+                    logger.invia("MODIFICA TITOLO");
                     
                 }
              }
@@ -174,6 +175,7 @@ public class GestoreProgettiGUI extends Application {
                     ((Compito) t.getTableView().getItems().get(
                         t.getTablePosition().getRow())
                         ).setDescrizione(t.getNewValue());
+                    logger.invia("MODIFICA DESCRIZIONE");
                 }
             }
         );
@@ -191,92 +193,8 @@ public class GestoreProgettiGUI extends Application {
         tabella_da_fare.setItems(compiti_da_fare);
         tabella_da_fare.getColumns().addAll(titoloCol1, descrizioneCol1);
     }
-
-        
-       
-
- 
-    @Override
-    public void start(Stage stage) {
-        
-        Scene scene = new Scene(new Group());
-        stage.setTitle("Applicazione Gestore Progetti");
-        //FIXUP: disabilitare il *2 per gli schermi non 4K
-        stage.setWidth(1000 * 2);
-        stage.setHeight(550 * 2);
-        
-        parametri_configurazione = new ParametriConfigurazione();
-        logger = new Logger(this);
-        
-        ponte_database = new PonteApplicazioneDB(this);
-        
-        /* imposta tabelle */
-        impostaTabella1();
-        
-        impostaTabella2();
-        
-        impostaTabella3();
-         /*end*/
-        
-
-        
-        
-
-        
-        
-        /*1*/
-        
-        /*2*/
-       
-
-        /*3*/
-       
-
-        // setuptabella(tab, data_tab);
- 
-        /* setup textinputs */
-        aggiungi_titolo = new TextField();
-        aggiungi_titolo.setPromptText("Titolo");
-        aggiungi_titolo.setMaxWidth(200*2);
-        aggiungi_descrizione = new TextField();
-        aggiungi_descrizione.setMaxWidth(200*2);
-        aggiungi_descrizione.setPromptText("Descrizione");
-        
-        cache_gui = new CacheGUI(this);
-        /*end*/
-
-         
-        /* imposta tasti */
-        tasto_elimina.setOnAction((ActionEvent e) -> {
-            System.out.println("titolo is: " + compito_selezionato.getTitolo());
-            lista_selezionata.remove(compito_selezionato);
-            logger.invia("Rimuovi");
-            updateGraph();
-            if (lista_selezionata.isEmpty()) {
-                tasto_elimina.setDisable(true);
-            }
-        });
-        tasto_elimina.setDisable(true);
-        
-        tasto_aggiungi.setOnAction((ActionEvent e) -> {
-            if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {
-                compiti_da_fare.add(new Compito(
-                        aggiungi_titolo.getText(),
-                        aggiungi_descrizione.getText()));
-                aggiungi_titolo.clear();
-                aggiungi_descrizione.clear();
-                logger.invia("Aggiungi");
-                updateGraph();
-            }
-        });
-        /*end */
-
-
-        
-        
-        /*setup frecce */
-        /*1*/
-        
+    
+    public void impostaFrecce(){
         sposta_da_fare_in_esecuzione.setOnAction((ActionEvent e) -> {
             System.out.println("sposta_da_fare_in_esecuzione");
             Compito selectedCompito = tabella_da_fare.getSelectionModel().getSelectedItem();
@@ -284,12 +202,11 @@ public class GestoreProgettiGUI extends Application {
                 if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {
                     compiti_in_esecuzione.add(selectedCompito);
                     compiti_da_fare.removeAll(selectedCompito);
-                    updateGraph();
+                    aggiornaGrafico();
                     logger.invia("sposta_da_fare_in_esecuzione");
                 }
             }
         });
-        
         sposta_in_da_fare.setOnAction((ActionEvent e) -> {
             System.out.println("sposta_in_da_fare");
             System.out.println(tabella_in_esecuzione.getSelectionModel().getSelectedItem());
@@ -298,64 +215,40 @@ public class GestoreProgettiGUI extends Application {
                 if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {
                     compiti_da_fare.add(selectedCompito);
                     compiti_in_esecuzione.removeAll(selectedCompito);
-                    updateGraph();
+                    aggiornaGrafico();
                     logger.invia("sposta_in_da_fare");
                 }            
             }
         });
-        /*2*/
-        
-        sposta_in_completati.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                System.out.println("sposta_in_completati");
-                System.out.println(tabella_in_esecuzione.getSelectionModel().getSelectedItem());
-                Compito selectedCompito = tabella_in_esecuzione.getSelectionModel().getSelectedItem();
-                if (selectedCompito != null) {
-                    if (compiti_completati.size() < parametri_configurazione.limite_terza_tabella) {
-                        compiti_completati.add(selectedCompito);
-                        compiti_in_esecuzione.removeAll(selectedCompito);
-                        updateGraph();
-                        logger.invia("sposta_in_completati");
-                    }
+        sposta_in_completati.setOnAction((ActionEvent e) -> {
+            System.out.println("sposta_in_completati");
+            System.out.println(tabella_in_esecuzione.getSelectionModel().getSelectedItem());
+            Compito selectedCompito = tabella_in_esecuzione.getSelectionModel().getSelectedItem();
+            if (selectedCompito != null) {
+                if (compiti_completati.size() < parametri_configurazione.limite_terza_tabella) {
+                    compiti_completati.add(selectedCompito);
+                    compiti_in_esecuzione.removeAll(selectedCompito);
+                    aggiornaGrafico();
+                    logger.invia("sposta_in_completati");
                 }            
             }
         });
-        
-        sposta_da_completati_in_esecuzione.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                System.out.println("sposta_da_completati_in_esecuzione");
-                System.out.println(tabella_completati.getSelectionModel().getSelectedItem());
-                Compito selectedCompito = tabella_completati.getSelectionModel().getSelectedItem();
-                if (selectedCompito != null) {
-                    if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {
-                        compiti_in_esecuzione.add(selectedCompito);
-                        compiti_completati.removeAll(selectedCompito);
-                        updateGraph();
-                        logger.invia("sposta_da_completati_in_esecuzione");
-                    }
+        sposta_da_completati_in_esecuzione.setOnAction( (ActionEvent e) -> {
+            System.out.println("sposta_da_completati_in_esecuzione");
+            System.out.println(tabella_completati.getSelectionModel().getSelectedItem());
+            Compito selectedCompito = tabella_completati.getSelectionModel().getSelectedItem();
+            if (selectedCompito != null) {
+                if (compiti_in_esecuzione.size() < parametri_configurazione.limite_seconda_tabella) {
+                    compiti_in_esecuzione.add(selectedCompito);
+                    compiti_completati.removeAll(selectedCompito);
+                    aggiornaGrafico();
+                    logger.invia("sposta_da_completati_in_esecuzione");
                 }            
             }
         });
-        /*end*/
-        // setupfrecce(tasto, src, dest);
-        
-       /* setup grafico */
-        dati_grafico =
-                FXCollections.observableArrayList(
-                new PieChart.Data(parametri_configurazione.nome_prima_tabella, 3),
-                new PieChart.Data(parametri_configurazione.nome_seconda_tabella, 3),
-                new PieChart.Data(parametri_configurazione.nome_terza_tabella, 3));
-        
-        grafico = new PieChart(dati_grafico);
-        grafico.setTitle("Andamento");
-
-        grafico.setLegendVisible(parametri_configurazione.mostra_legenda_grafico);
-        /*end*/
-
-
-        /*setup styleboxes */
+    }
+    
+    public void impostaStyleBoxes(){
         vbox1.setSpacing(5);
         vbox1.setPadding(new Insets(10, 10, 10, 10));
         vbox1.getChildren().addAll(nome_tabella_da_fare, tabella_da_fare, aggiungi_titolo, aggiungi_descrizione, tasto_aggiungi, tasto_elimina);
@@ -384,16 +277,94 @@ public class GestoreProgettiGUI extends Application {
         
         
         MasterVbox.setAlignment(Pos.CENTER);
+        MasterVbox.setStyle("-fx-background-color: " + parametri_configurazione.colore_background);
         
-        /*end*/
+    }
+
+    public void impostaGrafico(){
+        dati_grafico =
+        FXCollections.observableArrayList(
+        new PieChart.Data(parametri_configurazione.nome_prima_tabella, 3),
+        new PieChart.Data(parametri_configurazione.nome_seconda_tabella, 3),
+        new PieChart.Data(parametri_configurazione.nome_terza_tabella, 3));
         
+        grafico = new PieChart(dati_grafico);
+        grafico.setTitle("Andamento");
+
+        grafico.setLegendVisible(parametri_configurazione.mostraLegendaGrafico);
+    }
+    
+    public void impostaTasti(){
+        tasto_elimina.setOnAction((ActionEvent e) -> {
+            System.out.println("titolo is: " + compito_selezionato.getTitolo());
+            lista_selezionata.remove(compito_selezionato);
+            logger.invia("RIMUOVI");
+            aggiornaGrafico();
+            if (lista_selezionata.isEmpty()) {
+                tasto_elimina.setDisable(true);
+            }
+        });
+        tasto_elimina.setDisable(true);
+        
+        tasto_aggiungi.setOnAction((ActionEvent e) -> {
+            if (compiti_da_fare.size() < parametri_configurazione.limite_prima_tabella) {
+                compiti_da_fare.add(new Compito(
+                        aggiungi_titolo.getText(),
+                        aggiungi_descrizione.getText()));
+                aggiungi_titolo.clear();
+                aggiungi_descrizione.clear();
+                logger.invia("AGGIUNGI");
+                aggiornaGrafico();
+            }
+        });
+    }
+    
+    public void impostaTextInputs(){
+        aggiungi_titolo = new TextField();
+        aggiungi_titolo.setPromptText("Titolo");
+        aggiungi_titolo.setMaxWidth(200*2);
+        aggiungi_descrizione = new TextField();
+        aggiungi_descrizione.setMaxWidth(200*2);
+        aggiungi_descrizione.setPromptText("Descrizione");
+        
+        cache_gui = new CacheGUI(this);
+    }
+    
+    public void aggiornaGrafico() {
+        this.dati_grafico.set(0, new PieChart.Data(parametri_configurazione.nome_prima_tabella, this.tabella_da_fare.getItems().size()));
+        this.dati_grafico.set(1, new PieChart.Data(parametri_configurazione.nome_seconda_tabella, this.tabella_in_esecuzione.getItems().size()));
+        this.dati_grafico.set(2, new PieChart.Data(parametri_configurazione.nome_terza_tabella, this.tabella_completati.getItems().size()));
+    }
+ 
+    @Override
+    public void start(Stage stage) {
+        Scene scene = new Scene(new Group());
+        stage.setTitle("Applicazione Gestore Progetti");
+        //FIXUP: disabilitare il *2 per gli schermi non 4K
+        stage.setWidth(1000 * 2);
+        stage.setHeight(550 * 2);
+        parametri_configurazione = new ParametriConfigurazione();
+        logger = new Logger(this);
+        ponte_database = new PonteApplicazioneDB(this);
+        impostaTabella1();
+        impostaTabella2();
+        impostaTabella3();
+        impostaTextInputs();
+        impostaTasti();
+        impostaFrecce();
+        impostaGrafico();
+        impostaStyleBoxes();
         nome_progetto = new TextField();
         nome_progetto.setPromptText("Nome Progetto");
         nome_progetto.setMaxWidth(200*2);
         nome_progetto.setText(ponte_database.QueryProgetto());
-        // nome_progetto.setFocusTraversable(false);
-        
-              
+        nome_progetto.textProperty().addListener(new ChangeListener<String>() {
+        @Override 
+        public void changed(ObservableValue ov, String t, String t1) {                
+            logger.invia("CAMBIO NOME PROGETTO");
+        }    
+        });
+        MasterVbox.getChildren().addAll(id_progetto, nome_progetto, hbox);
         stage.setOnCloseRequest((WindowEvent we) -> {
             cache_gui.salvaInCache();
             ponte_database.aggiornaCompiti();
@@ -401,27 +372,14 @@ public class GestoreProgettiGUI extends Application {
             logger.invia("STOP");
             System.out.println("bye!");
         });
-        
-        MasterVbox.getChildren().addAll(id_progetto, nome_progetto, hbox);
         ((Group) scene.getRoot()).getChildren().addAll(MasterVbox);
-
- 
         stage.setScene(scene);
-        updateGraph();
-
+        aggiornaGrafico();
         logger.invia("AVVIO");
-
         stage.show();
     }
     
-    void updateGraph() {
-        this.dati_grafico.set(0, new PieChart.Data(parametri_configurazione.nome_prima_tabella, this.tabella_da_fare.getItems().size()));
-        this.dati_grafico.set(1, new PieChart.Data(parametri_configurazione.nome_seconda_tabella, this.tabella_in_esecuzione.getItems().size()));
-        this.dati_grafico.set(2, new PieChart.Data(parametri_configurazione.nome_terza_tabella, this.tabella_completati.getItems().size()));
-    }
- 
-    
- 
+
     class CellaEditabile extends TableCell<Compito, String> {
  
         private TextField textField;

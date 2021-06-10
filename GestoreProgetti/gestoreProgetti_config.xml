@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- skillshare_config.xml -->
-<ParametriConfigurazione mostra_legenda_grafico = "true">
+<ParametriConfigurazione mostraLegendaGrafico="true">
 	<limite_prima_tabella>3</limite_prima_tabella>
 	<limite_seconda_tabella>3</limite_seconda_tabella>
 	<limite_terza_tabella>4</limite_terza_tabella>
-	<nome_prima_tabella>mio Da fare</nome_prima_tabella>
-	<nome_seconda_tabella>mio In esecuzione</nome_seconda_tabella>
-	<nome_terza_tabella>mio Completati</nome_terza_tabella>
+	<nome_prima_tabella>Da fare</nome_prima_tabella>
+	<nome_seconda_tabella>In esecuzione</nome_seconda_tabella>
+	<nome_terza_tabella>Completati</nome_terza_tabella>
 	<colore_background>white</colore_background>
 	<id_progetto>1</id_progetto>
 	<ip_dbms>localhost</ip_dbms>

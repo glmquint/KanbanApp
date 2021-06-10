@@ -3,14 +3,14 @@ import java.io.*;
 import java.util.*;
 
 class MessaggioLog implements Serializable{
-    public String nome_progetto;
-    public String ip_client;
+    public String nomeProgetto;
+    public String IPClient;
     public Date istante;
     public String azione;
     
-    public MessaggioLog(String nome_progetto, String ip_client, Date istante, String azione){
-        this.nome_progetto = nome_progetto;
-        this.ip_client = ip_client;
+    public MessaggioLog(String nomeProgetto, String IPClient, Date istante, String azione){
+        this.nomeProgetto = nomeProgetto;
+        this.IPClient = IPClient;
         this.istante = istante;
         this.azione = azione;
     }

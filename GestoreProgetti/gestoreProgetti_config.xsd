@@ -35,8 +35,8 @@
     	</xs:element>
 	<xs:element name="porta_log_server" type="xs:decimal">
     	</xs:element>
- </xs:sequence> 
- <xs:attribute name="mostra_legenda_grafico"  type="xs:boolean"   use="required" />
+	</xs:sequence> 
+ <xs:attribute name="mostraLegendaGrafico"  type="xs:boolean"   use="required" />
  </xs:complexType>
 </xs:element>
 

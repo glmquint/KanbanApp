@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Logger {
     public GestoreProgettiGUI interfaccia;
-    public GestoreXML gestore_xml = new GestoreXML();
+    public OperatoreXML operatore_xml = new OperatoreXML();
     private MessaggioLog messaggioDaInviare;
     
     public Logger(GestoreProgettiGUI interfaccia){
@@ -19,7 +19,7 @@ public class Logger {
             ){
             messaggioDaInviare = new MessaggioLog(interfaccia.nome_progetto.getText(), interfaccia.parametri_configurazione.ip_client, new Date(), azione); //02
             
-            dout.writeUTF(gestore_xml.formattaMessaggio(messaggioDaInviare)); //04
+            dout.writeUTF(operatore_xml.formattaMessaggio(messaggioDaInviare)); //04
             } catch (IOException ex){
                 ex.printStackTrace();
             }

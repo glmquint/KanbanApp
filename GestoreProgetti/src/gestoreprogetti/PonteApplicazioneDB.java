@@ -52,7 +52,7 @@ public class PonteApplicazioneDB {
         return nome_progetto; //04
     }
     
-    private Boolean eseguiAggiornamento(String statement){
+    public Boolean eseguiAggiornamento(String statement){
         Boolean operazioneEseguita = false;
         String connessione = "jdbc:mysql://" + interfaccia.parametri_configurazione.ip_dbms + ":" + interfaccia.parametri_configurazione.porta_dbms + "/gestoreprogettidb";
         try
